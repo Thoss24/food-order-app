@@ -2,6 +2,7 @@
 .header {
     display: flex;
     justify-content: space-around;
+    align-items: center;
     background-color: rgba(189, 89, 58, 1);
     height: 5rem;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);

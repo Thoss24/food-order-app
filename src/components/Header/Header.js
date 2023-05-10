@@ -1,12 +1,13 @@
 import classes from "./Header.module.css";
+import Button from "../UI/Button/Button";
 
 const Header = () => {
   return (
-    <div>
+      <div>
       <div className={classes.header}>
         <h1>React Meals</h1>
-        <button>Your Cart</button>
-      </div>
+        <Button />
+        </div>
       <div className={classes.main}>
         <img src="/images/meals.jpg" alt="food platter" />
       </div>
