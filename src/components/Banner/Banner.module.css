@@ -1,0 +1,13 @@
+.banner {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    color: white;
+    padding: 1rem;
+    width: 50%;
+    box-shadow: 0 1px 18px 10px rgba(0, 0, 0, 0.25);
+    background-color: rgba(83, 78, 78, 1);
+    border-radius: 14px;
+    margin-top: -10rem;
+    position: relative;
+}

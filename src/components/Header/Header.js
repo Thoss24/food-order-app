@@ -1,9 +1,10 @@
 import classes from "./Header.module.css";
 import Button from "../UI/Button/Button";
+import { Fragment } from 'react';
 
 const Header = () => {
   return (
-      <div>
+    <Fragment>
       <div className={classes.header}>
         <h1>React Meals</h1>
         <Button />
@@ -11,7 +12,7 @@ const Header = () => {
       <div className={classes.main}>
         <img src="/images/meals.jpg" alt="food platter" />
       </div>
-    </div>
+    </Fragment>
   );
 };
 
