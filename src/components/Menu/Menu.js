@@ -2,6 +2,7 @@ import MenuWrapper from "../Wrapper/MenuWrapper";
 import MenuItem from "./MenuItem";
 
 const Menu = (props) => {
+
   return (
     <MenuWrapper>
       {props.items.map((expense) => (
@@ -10,7 +11,6 @@ const Menu = (props) => {
           name={expense.name}
           description={expense.description}
           price={expense.price}
-          amount={expense.amount}
         />
       ))}
     </MenuWrapper>

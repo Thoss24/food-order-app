@@ -1,7 +1,32 @@
-.menu-item-info {
+.menu-item-info n {
 
 }
 
 .amount {
-    
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 20%;
+    gap: 10px;
+}
+
+.amount button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 21%;
+    min-width: 50%;
+    font-weight: 600;
+    color: white;
+    font-size: 16px;
+    background-color: rgba(189, 89, 58, 1);
+    border: none;
+    border-radius: 14px;
+}
+
+.menu-item-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }

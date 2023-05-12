@@ -9,29 +9,25 @@ const MenuItems = [
     id: Math.random().toString(),
     name: 'Sushi',
     description: 'A variety of fresh fish such as salmon, tuna, bass and mackerel',
-    price: '£15.00',
-    amount: 1
+    price: '£15.00'
   },
   {
     id: Math.random().toString(),
     name: 'Burger',
     description: 'Fresh beef with mature cheddar cheese',
-    price: '£12.00',
-    amount: 1
+    price: '£12.00'
   },
   {
     id: Math.random().toString(),
     name: 'Ramen',
     description: 'Pork bone broth ramen with pork cutlets',
-    price: '£18.00',
-    amount: 1
+    price: '£18.00'
   },
   {
     id: Math.random().toString(),
     name: 'Salad',
     description: 'Fresh gem lettuce with seasonal veg and garlic chicken',
-    price: '£10.00',
-    amount: 1
+    price: '£10.00'
   }
 ];
 
