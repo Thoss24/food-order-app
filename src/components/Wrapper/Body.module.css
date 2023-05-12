@@ -1,0 +1,9 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    background-color: rgba(10, 10, 10, 0.8);
+    height: 100vh;
+}
+
