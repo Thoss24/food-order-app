@@ -1,0 +1,23 @@
+.cart-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.name-price-amount-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.name-price-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.amount-container {
+
+}
+
+.add-subtract-container {
+
+}
