@@ -4,6 +4,7 @@ import Body from "./components/Wrapper/Body";
 import Banner from "./components/Banner/Banner";
 import Menu from "./components/Menu/Menu";
 import Cart from "./components/Modal/Cart";
+import React, { useState } from "react";
 
 const MenuItems = [
   {
@@ -37,29 +38,42 @@ let MenuItemsInCart = [
   {
     key: Math.random().toString(),
     name: "Burger",
-    description: 'Test',
+    description: "Test",
     price: "£12.00",
-    amount: 2
-  }
+    amount: 2,
+  },
 ];
 
-const handleForwardedNewMenuItems = (items) => {
-  MenuItemsInCart = [items, ...MenuItemsInCart];
-  console.log(MenuItemsInCart);
-};
-
 function App() {
+  const [isCartDisplaying, setIsCartDisplaying] = useState(false)
+
+  let CartDisplayArea;
+
+  const handleForwardedNewMenuItems = (items) => {
+    MenuItemsInCart = [items, ...MenuItemsInCart];
+    console.log(MenuItemsInCart);
+  };
+
+  const handleIsCartDisplaying = (isDisplaying) => {
+    setIsCartDisplaying(isDisplaying)
+    console.log(isCartDisplaying);
+  };
+
+  if (isCartDisplaying) {
+    CartDisplayArea = <Cart cartItems={MenuItemsInCart} />;
+  }
+
   return (
     <Fragment>
-      <Header></Header>
+      <Header forwardedIsCartDisplaying={handleIsCartDisplaying}></Header>
       <Body>
         <Banner />
         <Menu
           items={MenuItems}
           forwardedNewMenuItems={handleForwardedNewMenuItems}
         />
-        <Cart cartItems={MenuItemsInCart}/>
-      </Body >
+        {CartDisplayArea}
+      </Body>
     </Fragment>
   );
 }

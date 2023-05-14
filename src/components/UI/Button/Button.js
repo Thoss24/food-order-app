@@ -1,10 +1,19 @@
-import classes from './Button.module.css';
-import { FaShoppingCart } from 'react-icons/fa'
+import classes from "./Button.module.css";
+import { FaShoppingCart } from "react-icons/fa";
+import React, { useState } from "react";
 
-const Button = () => {
-    return (
-        <button className={classes.button}><FaShoppingCart /> Your Cart</button>
-    )
-}
+const Button = (props) => {
+  const [isCartDisplaying, setIsCartDisplaying] = useState(true);
 
-export default Button
+  const buttonHandler = () => {
+    props.forwardedModalHandler(isCartDisplaying)
+  };
+
+  return (
+    <button className={classes.button} onClick={buttonHandler}>
+      <FaShoppingCart /> Your Cart
+    </button>
+  );
+};
+
+export default Button;
