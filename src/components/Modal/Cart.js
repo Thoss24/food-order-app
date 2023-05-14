@@ -1,6 +1,7 @@
 import classes from "./Cart.module.css";
 import CartItem from "./CartItem";
 import React, { Fragment } from 'react'
+import OrderButton from "../UI/Button/OrderButton";
 
 const Cart = (props) => {
   return (
@@ -12,7 +13,7 @@ const Cart = (props) => {
             <CartItem price={item.price} name={item.name} amount={item.amount} key={item.key}/>
         ))}
     </div>
-    <button>Order</button>
+    <OrderButton />
     </div>
     </Fragment>
   );
