@@ -45,7 +45,8 @@ let MenuItemsInCart = [
 ];
 
 function App() {
-  const [isCartDisplaying, setIsCartDisplaying] = useState(false)
+  const [isCartDisplaying, setIsCartDisplaying] = useState(false);
+  const [currentCartAmount, setCurrentCartAmount] = useState(MenuItemsInCart.length);
 
   let CartDisplayArea;
 
@@ -59,18 +60,27 @@ function App() {
     console.log(isCartDisplaying);
   };
 
-  if (isCartDisplaying) {
-    CartDisplayArea = <Cart cartItems={MenuItemsInCart} />;
+  const handleCartChangeDisplay = () => {
+    setIsCartDisplaying(false)
+  };
+
+  const cartUpdateHandler = () => {
+    setCurrentCartAmount(MenuItemsInCart.length)
   }
+
+  if (isCartDisplaying) {
+    CartDisplayArea = <Cart cartItems={MenuItemsInCart} onChangeCartDisplay={handleCartChangeDisplay}/>;
+  };
 
   return (
     <Fragment>
-      <Header forwardedIsCartDisplaying={handleIsCartDisplaying}></Header>
+      <Header forwardedIsCartDisplaying={handleIsCartDisplaying} cartAmount={currentCartAmount} ></Header>
       <Body>
         <Banner />
         <Menu
           items={MenuItems}
           forwardedNewMenuItems={handleForwardedNewMenuItems}
+          onCartAmountChange={cartUpdateHandler}
         />
         {CartDisplayArea}
       </Body>

@@ -11,7 +11,7 @@ const Header = (props) => {
     <Fragment>
       <div className={classes.header}>
         <h1>React Meals</h1>
-        <Button forwardedModalHandler={handleForwardedModalDisplay} />
+        <Button forwardedModalHandler={handleForwardedModalDisplay} cartAmount={props.cartAmount}/>
       </div>
       <div className={classes.main}>
         <img src="/images/meals.jpg" alt="food platter" />

@@ -18,7 +18,8 @@ const MenuItem = (props) => {
       amount: currentAmount
     };
 
-    props.onAddNewMenuItem(newMenuItem)
+    props.onAddNewMenuItem(newMenuItem);
+    props.cartAmountChange()
   };
 
   return (

@@ -12,6 +12,7 @@ const Button = (props) => {
   return (
     <button className={classes.button} onClick={buttonHandler}>
       <FaShoppingCart /> Your Cart
+      <div className={classes.amount}>{props.cartAmount}</div>
     </button>
   );
 };

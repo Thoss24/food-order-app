@@ -15,6 +15,7 @@ const Menu = (props) => {
           description={expense.description}
           price={expense.price}
           onAddNewMenuItem={ForwardNewMenuItem}
+          cartAmountChange={props.onCartAmountChange}
         />
       ))}
     </MenuWrapper>
