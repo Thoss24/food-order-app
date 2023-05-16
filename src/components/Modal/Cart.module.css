@@ -7,10 +7,12 @@
   border-radius: 4px;
   background-color: white;
   padding: 15px;
+  border-radius: 14px;
 }
 
 .cart-items-container {
   overflow-x: auto;
+  overflow-y: auto;
   max-height: 700px;
 }
 
