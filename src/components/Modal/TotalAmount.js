@@ -3,7 +3,7 @@ const TotalAmount = (props) => {
   return (
     <div>
       <h1>Total Amount</h1>
-      <p>£</p>
+      <p>£ {props.currentCartTotal}</p>
     </div>
   );
 };

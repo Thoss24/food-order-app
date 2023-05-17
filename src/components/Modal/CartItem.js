@@ -1,17 +1,6 @@
 import classes from "./CartItem.module.css";
-import React, { useState } from "react";
 
 const CartItem = (props) => {
-  const [currentCartTotal, setCurrentCartTotal] = useState();
-
-  const TotalCartAmount = () => {
-    let cartAmount = props.currentCart
-      .map((amount) => Number(amount.price.slice(1)))
-      .reduce((num1, num2) => num1 + num2);
-
-      setCurrentCartTotal(cartAmount)
-      console.log(currentCartTotal)
-  };
 
   return (
     <div className={classes["cart-item"]}>
@@ -25,8 +14,8 @@ const CartItem = (props) => {
         </div>
       </div>
       <div className={classes["add-subtract-container"]}>
-        <button onClick={TotalCartAmount}>-</button>
-        <button onClick={TotalCartAmount}>+</button>
+        <button onClick={props.onAdjustCartAmount}>-</button>
+        <button onClick={props.onAdjustCartAmount}>+</button>
       </div>
     </div>
   );
