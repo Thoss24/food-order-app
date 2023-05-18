@@ -75,6 +75,7 @@ function App() {
       <Cart
         cartItems={MenuItemsInCart}
         onChangeCartDisplay={handleCartChangeDisplay}
+        increaseMenuItemAmount={handleForwardedNewMenuItems}
       />
     );
   }

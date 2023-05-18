@@ -4,6 +4,7 @@ import MenuItem from "./MenuItem";
 const Menu = (props) => {
   const ForwardNewMenuItem = (items) => {
     props.forwardedNewMenuItems(items)
+    console.log(items)
   }
 
   return (

@@ -19,7 +19,7 @@ const MenuItem = (props) => {
     };
 
     props.onAddNewMenuItem(newMenuItem);
-    props.cartAmountChange()
+    props.cartAmountChange();
   };
 
   return (
