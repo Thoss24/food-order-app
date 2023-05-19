@@ -1,7 +1,13 @@
 import classes from "./MenuItem.module.css";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import { useContext } from 'react'
+import CartContext from "../../store/cart-context";
 
 const MenuItem = (props) => {
+
+  const cartCtx = useContext(CartContext);
+
+  const amountInputRef = useRef();
 
   const [currentAmount, setCurrentAmount] = useState(1);
 
@@ -9,17 +15,27 @@ const MenuItem = (props) => {
     setCurrentAmount(event.target.value)
   };
 
-  const AddMenuItemToCart = () => {
-      const newMenuItem = {
-      key: Math.random().toString(),
-      name: props.name,
-      description: props.description,
-      price: props.price,
-      amount: currentAmount
-    };
+  const submitHandler = () => {
+    //   const newMenuItem = {
+    //   key: Math.random().toString(),
+    //   name: props.name,
+    //   description: props.description,
+    //   price: props.price,
+    //   amount: currentAmount
+    // };
 
-    props.onAddNewMenuItem(newMenuItem);
-    props.cartAmountChange();
+    // props.onAddNewMenuItem(newMenuItem);
+
+    const currentAmount = amountInputRef.current.value;
+    const currentAmountNumber = +currentAmount
+
+    cartCtx.addItem({
+      id: props.id,
+      name: props.name, 
+      price: props.price,
+      amount: currentAmountNumber,
+    })
+
   };
 
   return (
@@ -31,8 +47,8 @@ const MenuItem = (props) => {
       </div>
       <div className={classes.amount}>
         <label htmlFor="">Amount</label>
-        <input type="number" min="1" defaultValue='1' max="50" onChange={AmountChangeHandler}/>
-        <button onClick={AddMenuItemToCart}>+ Add</button>
+        <input type="number" min="1" defaultValue='1' max="50" ref={amountInputRef} onChange={AmountChangeHandler}/>
+        <button onClick={submitHandler}>+ Add</button>
       </div>
     </div>
   );

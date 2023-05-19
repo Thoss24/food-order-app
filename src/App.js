@@ -5,6 +5,7 @@ import Banner from "./components/Banner/Banner";
 import Menu from "./components/Menu/Menu";
 import Cart from "./components/Modal/Cart";
 import React, { useState } from "react";
+import CartProvider from "./store/CartProvider";
 
 const MenuItems = [
   {
@@ -46,9 +47,6 @@ let MenuItemsInCart = [
 
 function App() {
   const [isCartDisplaying, setIsCartDisplaying] = useState(false);
-  const [currentCartAmount, setCurrentCartAmount] = useState(
-    MenuItemsInCart.length
-  );
 
   let CartDisplayArea;
 
@@ -66,10 +64,6 @@ function App() {
     setIsCartDisplaying(false);
   };
 
-  const cartUpdateHandler = () => {
-    setCurrentCartAmount(MenuItemsInCart.length);
-  };
-
   if (isCartDisplaying) {
     CartDisplayArea = (
       <Cart
@@ -81,21 +75,19 @@ function App() {
   }
 
   return (
-    <Fragment>
+    <CartProvider>
       <Header
         forwardedIsCartDisplaying={handleIsCartDisplaying}
-        cartAmount={currentCartAmount}
       ></Header>
       <Body>
         <Banner />
         <Menu
           items={MenuItems}
           forwardedNewMenuItems={handleForwardedNewMenuItems}
-          onCartAmountChange={cartUpdateHandler}
         />
         {CartDisplayArea}
       </Body>
-    </Fragment>
+    </CartProvider>
   );
 }
 
