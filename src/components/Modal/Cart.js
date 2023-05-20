@@ -10,15 +10,14 @@ const Cart = (props) => {
 
   const cartCtx = useContext(CartContext);
 
+  const addItemHandler = (item) => {
+    cartCtx.addItem({...item, amount:1})
+    console.log(cartCtx.totalAmount)
+  };
 
+  const removeItemHandler = () => {
 
-  let cartAmount = cartCtx.items
-    .map((amount) => Number(amount.price.slice(1)) * amount.amount)
-    .reduce((num1, num2) => num1 + num2);
-
-  const [currentCartTotal, setCurrentCartTotal] = useState(cartAmount);
-
-
+  };
 
   return (
     <Fragment>
@@ -29,13 +28,14 @@ const Cart = (props) => {
             <CartItem
               price={item.price}
               name={item.name}
-              // amount={item.amount}
+              amount={item.amount}
               key={item.key}
-              // currentCart={props.cartItems}
+              onAddItem={addItemHandler.bind(null, item)}
+              onRemoveItem={removeItemHandler.bind(null, item.id)}
             />
           ))}
         </div>
-        <TotalAmount currentCartTotal={currentCartTotal} />
+        <TotalAmount />
         <OrderButton closeCartDisplay={props.onChangeCartDisplay} />
       </div>
     </Fragment>
