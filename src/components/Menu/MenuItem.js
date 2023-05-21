@@ -22,7 +22,7 @@ const MenuItem = (props) => {
       amount: currentAmountNumber,
     });
 
-    console.log(props.name, props.price)
+    console.log(cartCtx.items)
   };
 
   return (

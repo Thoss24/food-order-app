@@ -7,31 +7,53 @@ const defaultCartState = {
 };
 
 const cartReducer = (state, action) => {
+
     if (action.type === 'ADD') {
         const updatedAmount = state.totalAmount + action.item.price * action.item.amount;
-
-        console.log(state, action)
 
         const existingCartItemIndex = state.items.findIndex((item) => item.id === action.item.id);
 
         const existingCartItem = state.items[existingCartItemIndex];
+        let updatedItem;
         let updatedItems;
 
         if (existingCartItem) {
-            const updatedItem = {
+            updatedItem = {
                 ...existingCartItem,
                 amount: existingCartItem.amount + action.item.amount
             };
             updatedItems = [...state.items];
             updatedItems[existingCartItemIndex] = updatedItem
         } else {
+            updatedItem = {...action.item};
             updatedItems = state.items.concat(action.item);
         }
         return {
-            items: updatedItems,
-            totalAmount: updatedAmount
+            items: updatedItems
+        }
+    };
+
+    if (action.type === 'REMOVE') {
+    
+        const existingCartItemIndex = state.items.findIndex((item) => item.id === action.id);
+
+        let existingItem = state.items[existingCartItemIndex];
+
+        let updatedItems;
+
+        if (existingItem.amount === 1) {
+            updatedItems = state.items.filter(item => item.id !== action.id)
+        } else {
+            const updatedItem = {...existingItem, amount: existingItem.amount - 1};
+            updatedItems = [...state.items];
+            updatedItems[existingCartItemIndex] = updatedItem
+        }
+
+        return {
+            items: updatedItems
         }
     }
+
     return defaultCartState
 };
 
@@ -59,9 +81,10 @@ const CartProvider = (props) => {
         removeItem: removeItemFromCartHandler
     };
 
-    return <CartContext.Provider value={cartContext}>
+    return ( <CartContext.Provider value={cartContext}>
         {props.children}
     </CartContext.Provider>
+    );
 }
 
 export default CartProvider

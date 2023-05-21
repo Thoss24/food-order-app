@@ -1,14 +1,18 @@
-import CartContext from "../../store/cart-context";
-import { useContext } from "react";
-import Cart from "./Cart";
+import { useContext } from 'react';
+import CartContext from '../../store/cart-context';
 
 const TotalAmount = (props) => {
+
   const cartCtx = useContext(CartContext);
+
+  const totalCartAmount = cartCtx.items.map((item) => item.price.slice(1) * item.amount).reduce((startNum, nextNum) => {
+    return startNum + nextNum
+  });
 
   return (
     <div>
       <h1>Total Amount</h1>
-      <p>£ {cartCtx.totalAmount}</p>
+      <p>£ {totalCartAmount}</p>
     </div>
   );
 };
