@@ -5,9 +5,15 @@ const TotalAmount = (props) => {
 
   const cartCtx = useContext(CartContext);
 
-  const totalCartAmount = cartCtx.items.map((item) => item.price.slice(1) * item.amount).reduce((startNum, nextNum) => {
-    return startNum + nextNum
-  });
+  let totalCartAmount;
+
+  if (cartCtx.items.length === 0) {
+    totalCartAmount = 0
+  } else {
+    totalCartAmount = cartCtx.items.map((item) => item.price.slice(1) * item.amount).reduce((startNum, nextNum) => {
+      return startNum + nextNum
+    });
+  }
 
   return (
     <div>

@@ -12,32 +12,39 @@ const Cart = (props) => {
 
   const addItemHandler = (item) => {
     cartCtx.addItem({...item, amount:1})
+    console.log(item)
   };
 
   const removeItemHandler = (id) => {
     cartCtx.removeItem(id)
   };
 
-  return (
+  let cartItems = (
     <Fragment>
-      <div className={classes.backdrop} onClick={props.onChangeCartDisplay} />
-      <div className={classes["cart-container"]}>
-        <div className={classes["cart-items-container"]}>
-          {cartCtx.items.map((item) => (
-            <CartItem
-              price={item.price}
-              name={item.name}
-              amount={item.amount}
-              key={item.key}
-              onAddItem={addItemHandler.bind(null, item)}
-              onRemoveItem={removeItemHandler.bind(null, item.id)}
-            />
-          ))}
-        </div>
-        <TotalAmount />
-        <OrderButton closeCartDisplay={props.onChangeCartDisplay} />
+    <div className={classes.backdrop} onClick={props.onChangeCartDisplay} />
+    <div className={classes["cart-container"]}>
+      <div className={classes["cart-items-container"]}>
+        {cartCtx.items.length >= 1 ? cartCtx.items.map((item) => (
+          <CartItem
+            price={item.price}
+            name={item.name}
+            amount={item.amount}
+            key={item.key}
+            onAddItem={addItemHandler.bind(null, item)}
+            onRemoveItem={removeItemHandler.bind(null, item.id)}
+          />
+        )) : <p className={classes['empty-basket']}>Basket is Empty</p>}
       </div>
-    </Fragment>
+      <TotalAmount />
+      <OrderButton closeCartDisplay={props.onChangeCartDisplay} />
+    </div>
+  </Fragment>
+  )
+
+  return (
+    <div>
+    {cartItems}
+    </div>
   );
 };
 
