@@ -10,7 +10,7 @@ const TotalAmount = (props) => {
   if (cartCtx.items.length === 0) {
     totalCartAmount = 0
   } else {
-    totalCartAmount = cartCtx.items.map((item) => item.price.slice(1) * item.amount).reduce((startNum, nextNum) => {
+    totalCartAmount = cartCtx.items.map((item) => item.price * item.amount).reduce((startNum, nextNum) => {
       return startNum + nextNum
     });
   }

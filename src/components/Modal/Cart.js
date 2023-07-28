@@ -5,10 +5,13 @@ import OrderButton from "../UI/Button/OrderButton";
 import TotalAmount from "./TotalAmount";
 import { useContext } from 'react'
 import CartContext from "../../store/cart-context";
+import useHttp from "../hooks/use_http";
 
 const Cart = (props) => {
 
   const cartCtx = useContext(CartContext);
+
+  const { sendRequest : makeOrder } = useHttp();
 
   const addItemHandler = (item) => {
     cartCtx.addItem({...item, amount:1})
@@ -17,6 +20,25 @@ const Cart = (props) => {
 
   const removeItemHandler = (id) => {
     cartCtx.removeItem(id)
+  };
+
+  const makeOrderHandler = async () => {
+
+    const applyData = (data) => {
+     let id = data.name
+     let order = {id: id, order: cartCtx.items}
+
+     console.log(order)
+    };
+
+    makeOrder({
+      url: "https://custom-hooks-react-http-default-rtdb.europe-west1.firebasedatabase.app/order.json",
+      method: 'POST',
+      body: {order : cartCtx.items},
+      headers: {
+        'Content-Type': 'applications/json'
+      }
+    }, applyData)
   };
 
   let cartItems = (
@@ -36,7 +58,7 @@ const Cart = (props) => {
         )) : <p className={classes['empty-basket']}>Basket is Empty</p>}
       </div>
       <TotalAmount />
-      <OrderButton closeCartDisplay={props.onChangeCartDisplay} />
+      <OrderButton sendOrder={makeOrderHandler}/>
     </div>
   </Fragment>
   )

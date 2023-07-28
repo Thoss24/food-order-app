@@ -19,7 +19,6 @@ const Button = (props) => {
 
   useEffect(() => {
     setCartChanged(true)
-    console.log(items.length)
 
     const timer = setTimeout(() => {
       setCartChanged(false)

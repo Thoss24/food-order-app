@@ -3,45 +3,44 @@ import Body from "./components/Wrapper/Body";
 import Banner from "./components/Banner/Banner";
 import Menu from "./components/Menu/Menu";
 import Cart from "./components/Modal/Cart";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CartProvider from "./store/CartProvider";
-
-const MenuItems = [
-  {
-    id: 4,
-    name: "Sushi",
-    description:
-      "A variety of fresh fish such as salmon, tuna, bass and mackerel",
-    price: "£15.00",
-  },
-  {
-    id: 3,
-    name: "Burger",
-    description: "Fresh beef with mature cheddar cheese",
-    price: "£12.00",
-  },
-  {
-    id: 2,
-    name: "Ramen",
-    description: "Pork bone broth ramen with pork cutlets",
-    price: "£18.00",
-  },
-  {
-    id: 1,
-    name: "Salad",
-    description: "Fresh gem lettuce with seasonal veg and garlic chicken",
-    price: "£10.00",
-  },
-];
+import useHttp from "./components/hooks/use_http";
 
 function App() {
   const [isCartDisplaying, setIsCartDisplaying] = useState(false);
+  const [menuItems, setMenuItems] = useState([]);
+
+  const { sendRequest } = useHttp();
+
+  const applyData = (data) => {
+    const fetchedMenuItems = [];
+
+    for (const item in data) {
+      fetchedMenuItems.push({
+        id: item,
+        key: item,
+        name: data[item].name,
+        description: data[item].description,
+        price: data[item].price,
+      });
+    }
+    setMenuItems(fetchedMenuItems);
+  };
+
+  useEffect(() => {
+    sendRequest(
+      {
+        url: "https://custom-hooks-react-http-default-rtdb.europe-west1.firebasedatabase.app/meals.json",
+      },
+      applyData
+    );
+  }, [sendRequest]); // we have to add sendRequest as a dependency to useEffect because sendRequest was defined outside of the useEffect and therefore could change. SO we add useCallback to sendRequest method inside custom hook
 
   let CartDisplayArea;
 
   const handleIsCartDisplaying = (isDisplaying) => {
     setIsCartDisplaying(isDisplaying);
-    console.log(isCartDisplaying);
   };
 
   const handleCartChangeDisplay = () => {
@@ -49,23 +48,15 @@ function App() {
   };
 
   if (isCartDisplaying) {
-    CartDisplayArea = (
-      <Cart
-        onChangeCartDisplay={handleCartChangeDisplay}
-      />
-    );
+    CartDisplayArea = <Cart onChangeCartDisplay={handleCartChangeDisplay} />;
   }
 
   return (
     <CartProvider>
-      <Header
-        forwardedIsCartDisplaying={handleIsCartDisplaying}
-      ></Header>
+      <Header forwardedIsCartDisplaying={handleIsCartDisplaying}></Header>
       <Body>
         <Banner />
-        <Menu
-          items={MenuItems}
-        />
+        <Menu items={menuItems} />
         {CartDisplayArea}
       </Body>
     </CartProvider>

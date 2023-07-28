@@ -17,12 +17,11 @@ const MenuItem = (props) => {
 
     cartCtx.addItem({
       id: props.id,
+      key: props.id,
       name: props.name, 
       price: props.price,
       amount: currentAmountNumber,
     });
-
-    console.log(cartCtx.items)
   };
 
   return (
