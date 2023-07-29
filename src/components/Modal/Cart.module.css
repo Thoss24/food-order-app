@@ -1,19 +1,22 @@
 .cart-container {
+  display: flex;
+  flex-direction: column;
   position: fixed;
-  top: 20vh;
-  width: 30%;
-  left: 35%;
-  z-index: 100;
+  top: 10%;
+  min-width: 40%;
   border-radius: 4px;
   background-color: white;
   padding: 15px;
   border-radius: 14px;
+  height: 70vh;
+  overflow: auto;
 }
 
-.cart-items-container {
-  overflow-x: auto;
-  overflow-y: auto;
-  max-height: 700px;
+.container {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: 100vw;
 }
 
 .backdrop {
@@ -27,4 +30,10 @@
 
 .empty-basket {
   font-size: 24px;
+}
+
+@media only screen and (max-width: 1500px) {
+  .cart-container {
+    min-width: 70%
+  }
 }

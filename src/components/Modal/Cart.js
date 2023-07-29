@@ -1,11 +1,12 @@
 import classes from "./Cart.module.css";
 import CartItem from "./CartItem";
-import React, { useState, Fragment } from "react";
+import React, { Fragment } from "react";
 import OrderButton from "../UI/Button/OrderButton";
 import TotalAmount from "./TotalAmount";
 import { useContext } from 'react'
 import CartContext from "../../store/cart-context";
 import useHttp from "../hooks/use_http";
+import CheckoutForm from "./CheckoutForm";
 
 const Cart = (props) => {
 
@@ -42,7 +43,7 @@ const Cart = (props) => {
   };
 
   let cartItems = (
-    <Fragment>
+    <div className={classes.container}>
     <div className={classes.backdrop} onClick={props.onChangeCartDisplay} />
     <div className={classes["cart-container"]}>
       <div className={classes["cart-items-container"]}>
@@ -58,9 +59,9 @@ const Cart = (props) => {
         )) : <p className={classes['empty-basket']}>Basket is Empty</p>}
       </div>
       <TotalAmount />
-      <OrderButton sendOrder={makeOrderHandler}/>
+      <CheckoutForm sendOrder={makeOrderHandler}/>
     </div>
-  </Fragment>
+  </div>
   )
 
   return (

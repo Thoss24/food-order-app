@@ -1,7 +1,8 @@
 import { useContext } from 'react';
 import CartContext from '../../store/cart-context';
+import classes from './TotalAmount.module.css'
 
-const TotalAmount = (props) => {
+const TotalAmount = () => {
 
   const cartCtx = useContext(CartContext);
 
@@ -16,7 +17,7 @@ const TotalAmount = (props) => {
   }
 
   return (
-    <div>
+    <div className={classes['total-amount']}>
       <h1>Total Amount</h1>
       <p>£ {totalCartAmount}</p>
     </div>
