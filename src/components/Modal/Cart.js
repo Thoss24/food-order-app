@@ -1,7 +1,5 @@
 import classes from "./Cart.module.css";
 import CartItem from "./CartItem";
-import React, { Fragment } from "react";
-import OrderButton from "../UI/Button/OrderButton";
 import TotalAmount from "./TotalAmount";
 import { useContext } from 'react'
 import CartContext from "../../store/cart-context";
@@ -40,6 +38,10 @@ const Cart = (props) => {
         'Content-Type': 'applications/json'
       }
     }, applyData)
+
+    props.orderIsDisplaying()
+    cartCtx.clearItems()
+
   };
 
   let cartItems = (

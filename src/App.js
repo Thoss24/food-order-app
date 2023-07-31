@@ -6,9 +6,11 @@ import Cart from "./components/Modal/Cart";
 import React, { useState, useEffect } from "react";
 import CartProvider from "./store/CartProvider";
 import useHttp from "./components/hooks/use_http";
+import OrderConfirmed from "./components/Modal/OrderConfirmed";
 
 function App() {
   const [isCartDisplaying, setIsCartDisplaying] = useState(false);
+  const [isOrdered, setIsOrdered] = useState(false);
   const [menuItems, setMenuItems] = useState([]);
 
   const { sendRequest } = useHttp();
@@ -39,6 +41,8 @@ function App() {
 
   let CartDisplayArea;
 
+  let OrderConfirmedDisplayArea;
+
   const handleIsCartDisplaying = (isDisplaying) => {
     setIsCartDisplaying(isDisplaying);
   };
@@ -47,8 +51,21 @@ function App() {
     setIsCartDisplaying(false);
   };
 
+  const orderConfirmedDisplaying = () => {
+    setIsOrdered(true)
+    setIsCartDisplaying(false)
+  };
+
+  const orderConfirmedNotDisplaying = () => {
+    setIsOrdered(false)
+  };
+
   if (isCartDisplaying) {
-    CartDisplayArea = <Cart onChangeCartDisplay={handleCartChangeDisplay} />;
+    CartDisplayArea = <Cart onChangeCartDisplay={handleCartChangeDisplay} orderIsDisplaying={orderConfirmedDisplaying}/>;
+  };
+
+  if (isOrdered) {
+    OrderConfirmedDisplayArea = <OrderConfirmed orderNotDisplaying={orderConfirmedNotDisplaying}/>
   }
 
   return (
@@ -58,6 +75,7 @@ function App() {
         <Banner />
         <Menu items={menuItems} />
         {CartDisplayArea}
+        {OrderConfirmedDisplayArea}
       </Body>
     </CartProvider>
   );
